@@ -5,11 +5,11 @@ const To_do_listSchema = new Schema({
   
     name:{
         type:String,
-        required:true
+        required:[true, "Please enter the name of the task"]
     },
     status:{
         type:String,
-        required:true
+        default:"Uncompleted"
     }
 });
 

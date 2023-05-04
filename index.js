@@ -37,6 +37,7 @@ app.get('/add-task', async (req, res) => {
                 status: "Not completed"
             }
         ])
+        res.send('Task added');
     } catch (error) {
         console.log('err', error)
     }
@@ -51,7 +52,7 @@ app.get('/view-task', async (req, res) => {
     }else{
         res.send('something went wrong');
     }
-})
+});
 //CONNECTION TO DATABASE
 connectDB().then(() => {
     app.listen(PORT, () => {
