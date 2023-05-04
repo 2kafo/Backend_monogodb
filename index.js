@@ -86,7 +86,7 @@ app.get('/view-task', async (req, res) => {
     const to_do_list = To_do_list.find();
 
     if(to_do_list){
-        res.json(to_do_list)
+        res.json.stringfy(to_do_list);
     }else{
         res.send('something went wrong');
     }
