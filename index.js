@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const To_do_list = require('./models/to_do_list');
 const user = require('./models/user');
+const to_do_list = require('./models/to_do_list');
 
 
 //DATABASE CONNECTION
@@ -35,28 +36,23 @@ app.get('/', (req, res) => {
 //insert user
 app.post('/user-create', async(req, res) => {
     try {
-        await user.insertMany([
-            {
-                fullname:"Amani Kafonogo",
-                username:"technical@assesment.com",
-                password:"1234"
-            }
-        ])
-        res.send("User created")
+       const user = await user.create(req.body);
+        res.status(200).json(user);
     } catch (error) {
         console.log('err', error);
     }
 });
 
 //Auth login users
-app.get('/user', (req, res) =>{
+app.get('/user-login', (req, res) =>{
     res.send(' user login user')
 });
 
 //create a new user
 app.post('/user-save', async (req, res) => {
     try {
-        res.send('Task_to_do_create_user')
+        res.send('Task_to_do_create_user');
+        
     } catch (error) {
         console.log('err', error);
     }
@@ -66,29 +62,25 @@ app.post('/user-save', async (req, res) => {
 
 //API FOR TO DO LIST MANIPULATION
 
-//insert deafult to do task to user loged in
-app.get('/add-task', async (req, res) => {
+//create to do item
+app.post('/add-task', async (req, res) => {
     try {
-        await To_do_list.insertMany([
-            {
-                name: "Get technical assessment started",
-                status: "Not completed"
-            }
-        ])
-        res.send('Task added');
+        const to_do_list = await To_do_list.create(req.body);
+        res.status(200).json(to_do_list);
+        
     } catch (error) {
         console.log('err', error);
     }
 });
 
-//api for viewing to do list
+//view to do items
 app.get('/view-task', async (req, res) => {
-    const to_do_list = To_do_list.find();
-
-    if(to_do_list){
-        res.json.stringfy(to_do_list);
-    }else{
-        res.send('something went wrong');
+    try {
+        const to_do_list = await To_do_list.find({});
+        res.status(200).json(to_do_list);
+    } catch (error) {
+        console.log('err', error);
+        res.status(500).json(to_do_list);
     }
 });
 //CONNECTION TO DATABASE
