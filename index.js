@@ -78,7 +78,7 @@ app.get('/view-task', async (req, res) => {
 app.get('/view-task/:id', async (req,res) => {
     try {
         const {id} = req.params
-         const to_do_list = await To_do_list.findById();
+         const to_do_list = await To_do_list.findById(id);
         res.status(200).json(to_do_list);
     } catch (error) {
         console.log('err', error);
