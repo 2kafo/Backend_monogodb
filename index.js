@@ -86,6 +86,20 @@ app.get('/view-task/:id', async (req,res) => {
     }
 });
 
+//update a to do item
+app.put('update-task/:id', async (req, res) =>{
+    try {
+        const {id} = req.params;
+        const to_do_list = await To_do_list.findByIdAndUpdate(id, req.body);
+        //if item not found in db
+        if(!to_do_list){
+            return res.status(404).json({message:`We cannot find the task with such Id`});
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
 //CONNECTION TO DATABASE
 connectDB().then(() => {
     app.listen(PORT, () => {
