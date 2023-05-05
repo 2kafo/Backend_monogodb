@@ -87,7 +87,7 @@ app.get('/view-task/:id', async (req,res) => {
 });
 
 //update a to do item
-app.put('update-task/:id', async (req, res) =>{
+app.put('/update-task/:id', async (req, res) =>{
     try {
         const {id} = req.params;
         const to_do_list = await To_do_list.findByIdAndUpdate(id, req.body);
