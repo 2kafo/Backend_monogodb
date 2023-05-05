@@ -10,6 +10,7 @@ const User = require('./models/user');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(express.urlencoded({extended: false}))
 
 mongoose.set('strictQuery', false);
 
@@ -95,11 +96,26 @@ app.put('/update-task/:id', async (req, res) =>{
         if(!to_do_list){
             return res.status(404).json({message:`We cannot find the task with such Id`});
         }
+         res.status(200).json(to_do_list);
     } catch (error) {
         res.status(500).json({message: error.message});
     }
 });
 
+//delete a to do item
+app.delete('/delete-item/:id', async(req, res) => {
+    try {
+        const (id) = req.params;
+        const to_do_list = await To_do_list.findByIdAndDelete(id);
+        if(!to_do_list){
+            return res.status(404).json({message:`cannot find any to do list with such id`});
+        
+        }
+        res.status(200).json(to_do_list);
+    } catch (error) {
+         res.status(500).json({message: error.message});
+    }
+});
 //CONNECTION TO DATABASE
 connectDB().then(() => {
     app.listen(PORT, () => {
