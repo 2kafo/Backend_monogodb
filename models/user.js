@@ -10,11 +10,11 @@ const UserSchema = mongoose.Schema(
         username: {
             type: String,
     
-            default: "technical@assesment.com"
+           
         },
         password: {
             type: String,
-            default: "1234"
+           
         }
     },
     {

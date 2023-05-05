@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const To_do_list = require('./models/to_do_list');
-const user = require('./models/user');
-const to_do_list = require('./models/to_do_list');
+const User = require('./models/user');
+
 
 
 //DATABASE CONNECTION
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 //insert user
 app.post('/user-create', async(req, res) => {
     try {
-       const user = await user.create(req.body);
+       const user = await User.create(req.body);
         res.status(200).json(user);
     } catch (error) {
         console.log('err', error);
@@ -46,16 +46,6 @@ app.post('/user-create', async(req, res) => {
 //Auth login users
 app.get('/user-login', (req, res) =>{
     res.send(' user login user')
-});
-
-//create a new user
-app.post('/user-save', async (req, res) => {
-    try {
-        res.send('Task_to_do_create_user');
-        
-    } catch (error) {
-        console.log('err', error);
-    }
 });
 
 
@@ -80,9 +70,22 @@ app.get('/view-task', async (req, res) => {
         res.status(200).json(to_do_list);
     } catch (error) {
         console.log('err', error);
-        res.status(500).json(to_do_list);
+        res.status(500).json({message: error.message});
     }
 });
+
+//view a single to do item
+app.get('/view-task/:id', async (req,res) => {
+    try {
+        const {id} = req.params
+         const to_do_list = await To_do_list.findById();
+        res.status(200).json(to_do_list);
+    } catch (error) {
+        console.log('err', error);
+         res.status(500).json({message: error.message});
+    }
+});
+
 //CONNECTION TO DATABASE
 connectDB().then(() => {
     app.listen(PORT, () => {
