@@ -4,6 +4,17 @@ const router = require("express").Router();
 import { genSalt, hash } from "bcrypt";
 
 router.post("/user-create", async (req, res) => {
+	const user = mongoose.model("user", UserSchema);
+
+const validate = (data) => {
+    const schema = Joi.object({
+        fullName: Joi.string().required().label("First Name"),
+
+        email: Joi.string().email().required().label("Email"),
+        password: passwordComplexity().required().label("Password"),
+    });
+    return schema.validate(data);
+};
 	try {
 		const { error } = validate(req.body);
 		if (error)
