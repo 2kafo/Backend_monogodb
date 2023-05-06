@@ -30,7 +30,7 @@ const connectDB = async () => {
 }
 
 //ROUTES CONNECTION(API)
-app.use("/api/users", userRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
 
