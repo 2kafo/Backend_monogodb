@@ -2,6 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = requir('cors')
 const mongoose = require('mongoose');
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+
 const To_do_list = require('./models/to_do_list');
 const User = require('./models/user');
 
@@ -27,31 +30,11 @@ const connectDB = async () => {
 }
 
 //ROUTES CONNECTION(API)
-
-//landing route
-app.get('/', (req, res) => {
-    res.send("Put url for front-end");
-});
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 
 //API FOR MANUPULATION OF USERS
-
-//insert user
-app.post('/user-create', async(req, res) => {
-    try {
-       const [fulName, userName,password] = req.body;
-       const check = await User.findOne({email:email});
-       if (check){}
-        res.status(200).json(user);
-    } catch (error) {
-        console.log('err', error);
-    }
-});
-
-//Auth login users
-app.get('/user-login', (req, res) =>{
-    res.send(' user login user')
-});
 
 
 
