@@ -8,7 +8,7 @@ const User = require('./models/user');
 
 //DATABASE CONNECTION
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
@@ -105,7 +105,7 @@ app.put('/update-task/:id', async (req, res) =>{
 //delete a to do item
 app.delete('/delete-item/:id', async(req, res) => {
     try {
-        const (id) = req.params;
+        const {id} = req.params;
         const to_do_list = await To_do_list.findByIdAndDelete(id);
         if(!to_do_list){
             return res.status(404).json({message:`cannot find any to do list with such id`});
