@@ -1,5 +1,6 @@
 const router = require("express").Router();
-import { user, validate } from "../models/user";
+import user from "../models/user";
+import validate  from "../models/user";
 import { genSalt, hash } from "bcrypt";
 
 router.post("/user-create", async (req, res) => {
