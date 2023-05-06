@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 //insert user
 app.post('/user-create', async(req, res) => {
     try {
-       const user = await User.create(req.body);
+       const [fulName, userName,password] = await req.body;
         res.status(200).json(user);
     } catch (error) {
         console.log('err', error);
