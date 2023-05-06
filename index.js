@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = requir('cors')
 const mongoose = require('mongoose');
 const To_do_list = require('./models/to_do_list');
 const User = require('./models/user');
@@ -9,6 +10,7 @@ const User = require('./models/user');
 //DATABASE CONNECTION
 const app = express();
 const PORT = process.env.PORT || 4000;
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
