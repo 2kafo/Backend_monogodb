@@ -7,21 +7,18 @@ const UserSchema = mongoose.Schema(
             type: String,
             required: [true, "Please enter the name of the user"]
         },
-        username: {
-            type: String,
-              
-        },
+
         email: {
             type: String,
-              
+
         },
         password: {
             type: String,
-           
+
         }
     },
     {
-        timestamps:true
+        timestamps: true
     }
 );
 module.exports = mongoose.model('user', UserSchema);
