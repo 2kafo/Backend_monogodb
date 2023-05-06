@@ -39,7 +39,9 @@ app.get('/', (req, res) => {
 //insert user
 app.post('/user-create', async(req, res) => {
     try {
-       const [fulName, userName,password] = await req.body;
+       const [fulName, userName,password] = req.body;
+       const check = await User.findOne({email:email});
+       if (check){}
         res.status(200).json(user);
     } catch (error) {
         console.log('err', error);
@@ -67,7 +69,7 @@ app.post('/add-task', async (req, res) => {
 });
 
 //view to do items
-app.get('/view-task', async (req, res) => {
+app.get('/view-tasks', async (req, res) => {
     try {
         const to_do_list = await To_do_list.find({});
         res.status(200).json(to_do_list);
