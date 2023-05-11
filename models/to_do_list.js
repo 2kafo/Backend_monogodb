@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = import('mongoose');
 
 const Schema = mongoose.Schema;
 const To_do_listSchema = mongoose.Schema(

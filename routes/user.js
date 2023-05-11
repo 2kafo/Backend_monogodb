@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = import("express").Router();
 import user from "../models/user.cjs";
 import validate  from "../models/user.cjs";
 import { genSalt, hash } from "bcrypt";
