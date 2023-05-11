@@ -1,6 +1,6 @@
 const router = require("express").Router();
-// import user from "../models/user";
-// import validate  from "../models/user";
+import user from "../models/user";
+import validate  from "../models/user";
 import { genSalt, hash } from "bcrypt";
 
 router.post("/user-create", async (req, res) => {
@@ -18,7 +18,9 @@ const validate = (data) => {
 	try {
 		const { error } = validate(req.body);
 		if (error)
-			return res.status(400).send({ message: error.details[0].message });
+			return res
+				.status(400)
+				.send({ message: error.details[0].message });
 
 		const user = await user.findOne({ email: req.body.email });
 		if (user)
