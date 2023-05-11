@@ -16,6 +16,7 @@ const validate = (data) => {
     return schema.validate(data);
 };
 	try {
+		//error collection
 		const { error } = validate(req.body);
 		if (error)
 			return res
